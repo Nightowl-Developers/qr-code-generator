@@ -1,25 +1,13 @@
 "use client";
 import * as React from "react";
 import QrCodeReact from 'react-qr-code'
-import QRCode from "qrcode";
-import { encode } from "base-64";
 
 export default function Home() {
-  const [canvasRef, setCanvasRef] = React.useState<HTMLCanvasElement | null>(undefined);
   const [qrCodeContent, setQrCodeContent] = React.useState("");
-  const [qrCodeImageData, setQrCodeImageData] = React.useState("");
 
   function handleQrCodeContentOnChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setQrCodeContent(event.currentTarget.value);
   }
-
-  React.useEffect(() => {
-    if (!!canvasRef) {
-      QRCode.toDataURL(canvasRef, qrCodeContent, function (error: any, url: string) {
-        setQrCodeImageData(url);
-      });
-    }
-  }, [qrCodeContent])
 
   return (
     <main className="container my-4 mx-auto flex flex-col md:flex-row gap-2">
@@ -42,7 +30,7 @@ export default function Home() {
           value={qrCodeContent}
         />
 
-        <a
+        {/* <a
           aria-disabled={!!qrCodeImageData}
           className="inline-block my-2 hover:text-blue-300"
           href={`data:image/png;base64${qrCodeImageData}`}
@@ -52,7 +40,7 @@ export default function Home() {
           rel="noreferrer"
         >
           Download QR Code Image
-        </a>
+        </a> */}
       </div>
     </main>
   )
