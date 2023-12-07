@@ -4,6 +4,7 @@ import QrCodeReact from 'react-qr-code'
 
 export default function Home() {
   const [qrCodeContent, setQrCodeContent] = React.useState("");
+  const [qrCodeImageData, setQrCodeImageData] = React.useState("");
 
   function handleQrCodeContentOnChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setQrCodeContent(event.currentTarget.value);
@@ -30,7 +31,7 @@ export default function Home() {
           value={qrCodeContent}
         />
 
-        {/* <a
+        <a
           aria-disabled={!!qrCodeImageData}
           className="inline-block my-2 hover:text-blue-300"
           href={`data:image/png;base64${qrCodeImageData}`}
@@ -40,7 +41,7 @@ export default function Home() {
           rel="noreferrer"
         >
           Download QR Code Image
-        </a> */}
+        </a>
       </div>
     </main>
   )
