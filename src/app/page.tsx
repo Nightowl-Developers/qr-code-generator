@@ -5,6 +5,7 @@ import QRCode from "qrcode";
 import { encode } from "base-64";
 
 export default function Home() {
+  const [canvasRef, setCanvasRef] = React.useState<HTMLCanvasElement | null>(undefined);
   const [qrCodeContent, setQrCodeContent] = React.useState("");
   const [qrCodeImageData, setQrCodeImageData] = React.useState("");
 
@@ -13,17 +14,11 @@ export default function Home() {
   }
 
   React.useEffect(() => {
-    QRCode.toDataURL(qrCodeContent, {
-      type: "png"
-    }, function (error: Error, url: string) {
-      if (error) {
-        console.error(error);
-      }
-
-      console.log('url: ', url);
-
-      setQrCodeImageData(url);
-    });
+    if (!!canvasRef) {
+      QRCode.toDataURL(canvasRef, qrCodeContent, function (error: any, url: string) {
+        setQrCodeImageData(url);
+      });
+    }
   }, [qrCodeContent])
 
   return (
